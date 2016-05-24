@@ -2,19 +2,23 @@
   // 1) What is the purpose of the 'this keyword'?
 
       //Answer
-
+// to be able to redefine, define, create, or access, the variables (properties) of an object.
   // 2) What are the four rules that govern what the 'this keyword' is bound to and describe each?
 
       //Answer
-
+      // EXPLICIT- The object name is already stated and the "this" applies to said object. It's to the left of the dot.
+      // IMPLICIT- The object name is implied, because the "this" is in the object it's referencing already.
+      // DEFAULT- The object is defaulted to the window, this happens when there is no implicit, explicit or new object tied to the "this".
+      // NEW- the constructor function is defined, however the object is not yet applied, it allow's for the creation of properties for an object that does not exsist yet.
   // 3) What is the difference between call and apply?
-
       //Answer
+      // 1. CALL - Can take in any number of parameters, first one being the object name, becuase it is implicit.
+      // 2. APPLY- Can only take in two parameters in, the first being the object name, the second being an array. The only real difference between the two is that you must pass one an array, and the other cannot.... They process the parameters the same way
 
   // 4) What does .bind do?
 
       //Answer
-
+      //bind will tie a certain function to an explicit object, making it forever and always tied to it.
 
 //Next Problem
 
@@ -24,9 +28,16 @@
   //getUsername --> which is a function that returns the current object's username property. *Don't use 'user' instead use the 'this' keyword*
 
     //Code Here
+    var user = {
+      username: "goodgoodnotbad",
+      email: "goodgoodnotbad@internet.com",
+      getUsername: function () {
+        return this.username;
+      }
+    };
 
 //Now, invoke the getUsername method and verify you got the username of the object and not anything else.
-
+user.getUsername();
 
 //Next Problem
 
@@ -34,6 +45,16 @@
 // Write the function definitions which will make the following function invocations function properly.
 
   //Function Invocations Here
+function Car(make, model, year, move) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.move = move;
+  this.moveCar= function(x) {
+    this.move += x;
+    return this.move;
+    };
+  }
 
 var prius = new Car('Toyota', 'Prius', 2011);
 var mustang = new Car('Ford', 'Mustang', 2013);
@@ -55,8 +76,8 @@ var getYear = function(){
 
 //Note(no tests)
   //Code Here
-
-
+getYear(prius);
+getYear(mustang);
 //New Problem
 
 
@@ -76,9 +97,10 @@ setTimeout(getMyUsername, 5000);
 //Above you're given an object, a function, and a setTimeout invocation. After 5 seconds, what will the getUsername function return?
 //Note(no tests)
   //Answer Here
-
+// It's going to give the function definition, because there is no object parameter defined for invocation.
 //In the example above, what is the 'this keyword' bound to when getUsername runs?
 
   //Answer Here
-
+// default, so the window console.
 //Fix the setTimeout invocation so that the user object will be the focal object when getUsername is ran.
+setTimeout(getMyUsername(myUser),5000);
